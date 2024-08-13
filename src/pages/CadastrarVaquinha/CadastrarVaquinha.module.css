@@ -1,0 +1,34 @@
+.form_style{
+    padding: 9px 10px;
+    border-radius: 10px;
+    width: 100%;
+    height:50px;
+    border: 1px solid #ccc;
+    font-size: 14pt;
+}
+.form_style::placeholder{
+    color:#999;
+}
+.botao_vaquinha1{
+    padding: 9px 10px;
+    font-size: 14pt;
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: var(--primary);
+    border: none;
+    color: white;
+}
+.botao_vaquinha1:hover{
+    cursor: pointer;
+    
+}
+.error_message{
+    color:red;
+}
+
+
+.element{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}

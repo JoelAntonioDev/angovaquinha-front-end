@@ -1,0 +1,28 @@
+.container_user_profile{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.left_side_up{
+    width: 20%;
+}
+
+.right_side_up{
+    width: 80%;
+}
+
+.left_buttoms{
+    display: flex;
+    flex-direction: column;
+}
+.left_buttoms button{
+    padding: 5px 20px;
+}
+.left_buttoms button:hover{
+    cursor: pointer;
+    
+}
+.container_contact{
+    margin-top: 10%;
+}
