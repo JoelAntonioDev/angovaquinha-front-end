@@ -10,7 +10,7 @@ function Container() {
   const [caminhoImagem, setCaminhoImagem] = useState();
   const [objectivo, setObjectivo] = useState();
   useEffect(() => {
-    fetch("/api/get-vaquinha", {
+    fetch("/api/get-vaquinhas", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -18,7 +18,7 @@ function Container() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
+        console.log(data);
         if (data.data !== "") {
           setId(data.data[0].id);
           setTitulo(data.data[0].titulo);
@@ -27,6 +27,22 @@ function Container() {
           setCaminhoImagem(data.data[0].caminhoImagem);
           setObjectivo(data.data[0].quantia);
         }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+  useEffect(()=>{
+    fetch("/api/get-vaquinha", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({titulo:"F"})
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
