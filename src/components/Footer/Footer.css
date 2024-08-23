@@ -1,27 +1,31 @@
 .section__padding{
-    padding:1rem 4rem;
+ 
 }
-
 .footer{
     background-color: var(--primary);
     display: flex;
     justify-content: space-around;
+    gap:5px;
 }
 
 .sb__footer{
+    background-color: var(--primary);
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    gap:10px;
 }
 
 .sb__footer-links{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     text-align: left;
     margin-bottom: 2rem;
+    gap:50px;
 }
 
 .sb__footer-links_div{

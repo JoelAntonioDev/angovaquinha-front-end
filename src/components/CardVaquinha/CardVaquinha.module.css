@@ -1,70 +1,83 @@
-.container_card{
+.container_card {
     background-color: grey;
     height: 60vh;
     display: flex;
     flex-direction: row;
-    
-}
-p{
+  }
+  
+  p {
     text-align: justify;
-}
-.leftSide{
-    width: 60%;
+  }
+  
+  .leftSide {
+    width: 55%;
     background-color: rgba(32, 170, 216, 0.5);
     padding-top: 40px;
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
     flex-direction: column;
-    gap:15px;
-}
-.rightSide{
-    width: 40%;
-    padding: 10px;
-    background-image: url('./fhotoo.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.status_bar{
+    gap: 15px;
+  }
+  
+  .rightSide {
+    width: 45%;
+  }
+  
+  .status_bar {
     display: flex;
     flex-direction: row;
-}
-.status_barLeft{
+  }
+  
+  .status_barLeft {
     background-color: green;
     height: 20px;
-    width:400px;
+    width: 400px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-}
-.status_barRight{
+  }
+  
+  .status_barRight {
     background-color: white;
     height: 20px;
-    width:300px;
+    width: 300px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-}
-.porcentagem{
+  }
+  
+  .porcentagem {
     margin-left: 4px;
-}
-a{
+  }
+  
+  a {
     color: white;
-}
-.botao_verContribuidores{
+  }
+  
+  .botao_verContribuidores {
     padding: 12px 40px;
     border-radius: 20px;
     background-color: var(--primary);
     border: 2px solid white;
     color: white;
     font-weight: 600;
-}
-.botao_verContribuidores:hover{
+  }
+  
+  .botao_verContribuidores:hover {
     cursor: pointer;
     background-color: white;
     color: black;
-    transition: .3s;
-}
-.container_botao{
+    transition: 0.3s;
+  }
+  
+  .container_botao {
     display: flex;
     justify-content: center;
-}
+    gap: 15px;
+  }
+  
+  /* Adicionei esta classe */
+  .rightSide img {
+    width: 100%;
+    height: 100%;
+  }
+  

@@ -2,14 +2,16 @@ import React, { useState, useRef } from "react";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
+
 function Login() {
   const toast = useRef(null);
-  const show = (error) => {
-    const message = error.message ? error.message : "An unknown error occurred";
+
+  const show = () => {
     toast.current.show({
-      severity: "danger",
-      summary: "Error",
-      detail: message,
+      severity: "error",
+      summary: "Erro",
+      detail: "Impossível fazer login!",
+      life: 3000
     });
   };
 
@@ -17,7 +19,9 @@ function Login() {
     email: "",
     senha: "",
   });
+
   const navigate = useNavigate();
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -28,7 +32,6 @@ function Login() {
 
   const handleEntrar = (e) => {
     e.preventDefault();
-    console.log(formData);
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -52,7 +55,7 @@ function Login() {
       })
       .catch((error) => {
         console.error("Erro:", error);
-        show(error);
+        show();
       });
   };
 
@@ -62,7 +65,7 @@ function Login() {
 
   return (
     <div className={styles.containerSignup}>
-      <Toast ref={toast} />
+      <Toast ref={toast} style={{ padding: "10px" }} />
       <div className={styles.containerCentral}>
         <div className={styles.leftSide}>
           <div className={styles.containerLeftSide}>
@@ -114,6 +117,51 @@ function Login() {
           </div>
         </div>
       </div>
+      {/* Estilos para o Toast */}
+      <style jsx>{`
+        .p-toast {
+          background-color: #333; /* Cor de fundo do toast */
+          border-radius: 8px; /* Bordas arredondadas */
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+          color: white; /* Cor do texto */
+        }
+
+        .p-toast-container {
+          margin-bottom: 10px; /* Espaçamento entre as mensagens */
+          
+        }
+
+        .p-toast-item {
+          background-color: #444; /* Cor de fundo da mensagem */
+          padding: 45px; /* Espaçamento interno */
+          border-radius: 8px; /* Bordas arredondadas */
+          display: flex;
+          align-items: center;
+        }
+
+        .p-toast-icon-close {
+          color: #fff; /* Cor do ícone de fechar */
+          font-size: 1.2em; /* Tamanho do ícone */
+          margin-left: 10px; /* Espaçamento à esquerda */
+          cursor: pointer; /* Cursor do mouse */
+        }
+
+        .p-toast-image {
+          margin-right: 10px; /* Espaçamento à direita */
+          font-size: 1.5em; /* Tamanho do ícone */
+        }
+
+        .p-toast-message {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .p-toast-title {
+          font-weight: bold; /* Texto em negrito */
+          margin-bottom: 5px; /* Espaçamento abaixo do título */
+          color: #ff6b6b; /* Cor específica para o título */
+        }
+      `}</style>
     </div>
   );
 }

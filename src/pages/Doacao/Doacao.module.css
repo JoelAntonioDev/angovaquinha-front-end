@@ -1,0 +1,43 @@
+.container_doacao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 30px;
+}
+.form_style{
+    padding: 9px 10px;
+    border-radius: 10px;
+    width: 100%;
+    height:50px;
+    border: 1px solid #ccc;
+    font-size: 14pt;
+}
+.form_style::placeholder{
+    color:#999;
+}
+
+.botao_doacao{
+    padding: 9px 10px;
+    font-size: 14pt;
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: var(--primary);
+    border: none;
+    color: white;
+}
+.botao_doacao:hover{
+    cursor: pointer;
+}
+
+table,th,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.contribuintes{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

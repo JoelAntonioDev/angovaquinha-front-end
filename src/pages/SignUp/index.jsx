@@ -15,7 +15,6 @@ function SignUp(){
         });
       };
     const handleCadastrarUsuarios = (e)=>{
-        e.preventDefault();
         console.log(formData);
         if(formData.nome=="" && formData.email=="" && formData.senha=="")
         {
@@ -55,7 +54,6 @@ function SignUp(){
                             <h4>Bem-vindo ao AngoVaquinhas</h4>
                             <p> Acesse à sua conta agora mesmo</p>
                             <button className={styles.botaoEntrar} onClick={handleEntrar}>ENTRAR</button>
-                            <a href="#">Esqueci minha senha</a>
                         </div>
                     </div>
                 </div>

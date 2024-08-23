@@ -1,10 +1,9 @@
 import styles from "./HeaderIn.module.css";
-import { Menubar } from "primereact/menubar";
+import { Avatar } from "primereact/avatar";
 function HeaderIn() {
   const value = localStorage.getItem("user");
   const userData = value ? JSON.parse(value) : null;
   const handleLogout = () => {
-    console.log("entrou");
     fetch("/api/logout", {
       method: "GET",
       headers: {
@@ -22,68 +21,29 @@ function HeaderIn() {
         console.log(error);
       });
   };
-  const items = [
-    {
-      label: (
-        <>
-          <a href="">
-            <span>AngoVaquinhas</span>
-          </a>
-        </>
-      ),
-      icon: "pi pi-home",
-    },
-    {
-      label: (
-        <>
-          <a href="#">Explorar</a>
-        </>
-      ),
-      icon: "pi pi-star",
-    },
-    {
-      label: (
-        <>
-          <a href="#">Criar Vaquinha</a>
-        </>
-      ),
-      icon: "pi pi-search",
-    },
-    {
-      label: (
-        <>
-          <a href="/userProfile">UserEmail</a>
-        </>
-      ),
-      icon: "pi pi-search",
-    },
-    {
-      label: (
-        <>
-          <a href="#" onClick={handleLogout}>
-            Sair
-          </a>
-        </>
-      ),
-      icon: "pi pi-search",
-    },
-  ];
+
   return (
     <>
       <header className={styles.headerIn}>
-        <a href="">
+        <a href="/home">
           <span>AngoVaquinhas</span>
         </a>
         <nav style={{ display: "flex", gap: "10px" }}>
-          <a href="#">Explorar</a>
-          <a href="#">Criar Vaquinha</a>
-          <a href="/userProfile">{userData.email}</a>
-          <a href="#">Sair</a>
+          <a href="/explorar">Explorar</a>
+          <a href="/cadastroVaquinha">Criar Vaquinha</a>
+
+          <a href="/userProfile">
+            <Avatar
+              image="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png"
+              className="mr-2"
+              size="large"
+              shape="circle"
+            />
+            {userData.email}
+          </a>
+          <a onClick={handleLogout}>Sair</a>
         </nav>
       </header>
-      <div className="card" style={{ backgroundColor: "red" }}>
-        <Menubar model={items} />
-      </div>
     </>
   );
 }

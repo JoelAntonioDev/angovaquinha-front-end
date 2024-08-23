@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import HeaderIn from "../../components/HeaderIn";
 import Footer from "../../components/Footer";
 import styles from "./CadastrarVaquinha.module.css";
+import { Toast } from "primereact/toast";
+
 const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
   const validationSchema = Yup.object().shape({
     titulo: Yup.string().required("Título é obrigatório"),
@@ -28,10 +30,6 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
       .typeError(
         "Quantia é obrigatória, digite 0 caso não precise de valores monetários"
       ),
-    email: Yup.string()
-      .nullable()
-      .required("Email é obrigatório")
-      .typeError("Email é obrigatório"),
   });
 
   const {
@@ -40,38 +38,77 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      email: "",
-    },
   });
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("file", data.file[0]); // Onde 'selectedFile' é o arquivo selecionado
-    formData.append("email", data.email);
+    formData.append("file", data.file[0]);
+    formData.append("email", user.email);
     formData.append("objectivo", data.objectivo);
     formData.append("subcategoria", data.subcategoria);
     formData.append("categoria", data.categoria);
     formData.append("descricao", data.descricao);
     formData.append("titulo", data.titulo);
     console.log(formData);
-    // Aqui você pode fazer a chamada à API para salvar a vaquinha
+
     fetch("/api/add-vaquinha", {
-      method: "POST", 
-      body: formData, 
+      method: "POST",
+      body: formData,
     })
-      .then((response) => response.json()) 
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         console.log("Success:", data);
-        window.location.href="/cadastroVaquinha";
+        showSuccess();
+        window.location.href = "/cadastroVaquinha";
       })
       .catch((error) => {
         console.error("Error:", error);
+        showError();
       });
   };
 
   const [categorias, setCategorias] = useState([]);
-  const [subcategorias, setSubcategorias] = useState([]);
+  const [subcategoriasOriginais, setSubcategoriasOriginais] = useState([]); // Estado para armazenar as subcategorias originais
+  const [subcategoriasFiltradas, setSubcategoriasFiltradas] = useState([]); // Estado para armazenar as subcategorias filtradas
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
+
+  const handleCategoriaChange = (event) => {
+    const selectedCategoryId = event.target.value;
+    setCategoriaSelecionada(selectedCategoryId);
+
+    if (selectedCategoryId) {
+      const filteredSubcategorias = subcategoriasOriginais.filter(
+        (subcat) => subcat.categoria.id === parseInt(selectedCategoryId)
+      );
+      setSubcategoriasFiltradas(filteredSubcategorias);
+    } else {
+      setSubcategoriasFiltradas([]); // Limpa as subcategorias se nenhuma categoria estiver selecionada
+    }
+  };
+
+  const value = localStorage.getItem("user");
+  const user = value ? JSON.parse(value) : null;
+  const toast = useRef(null);
+
+  const showSuccess = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Vaquinha Feita",
+      detail: "Sua vaquinha foi recebida, agora o sistema fará a validação",
+      life: 3000,
+    });
+  };
+
+  const showError = () => {
+    toast.current.show({
+      severity: "error",
+      summary: "Erro ao criar vaquinha",
+      detail: "Impossível criar vaquinha! Por favor, reporte!",
+      life: 3000,
+    });
+  };
 
   useEffect(() => {
     fetch("/api/get-categorias", {
@@ -87,15 +124,15 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        setSubcategorias(data.data);
+        console.log(data.data);
+
+        setSubcategoriasOriginais(data.data); // Armazena todas as subcategorias no estado original
 
         let category = [];
 
         for (let i = 0; i < data.data.length; i++) {
           if (data.data[i].categoria) {
             const cat = data.data[i].categoria;
-            // Adiciona categoria se ainda não estiver no array
             if (!category.some((c) => c.id === cat.id)) {
               category.push(cat);
             }
@@ -112,6 +149,7 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
   return (
     <div className="container_cadastrar">
       <HeaderIn />
+      <Toast ref={toast} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
@@ -172,7 +210,11 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
         </div>
         <div className={styles.element}>
           <h2>Defina a categoria em que sua vaquinha se encaixa</h2>
-          <select {...register("categoria")} className={styles.form_style}>
+          <select
+            {...register("categoria")}
+            className={styles.form_style}
+            onChange={handleCategoriaChange}
+          >
             <option value="">Selecione uma categoria</option>
             {Array.isArray(categorias) &&
               categorias.map((categoria) => (
@@ -181,6 +223,7 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
                 </option>
               ))}
           </select>
+
           <p className={styles.error_message}>{errors.categoria?.message}</p>
         </div>
 
@@ -188,23 +231,29 @@ const CadastrarVaquinha = ({ estadosVaquinha = [], usuarios = [] }) => {
           <p>A subcategoria é baseada na categoria selecionada</p>
           <select {...register("subcategoria")} className={styles.form_style}>
             <option value="">Selecione uma subcategoria</option>
-            {Array.isArray(subcategorias) &&
-              subcategorias.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.nome}
+            {Array.isArray(subcategoriasFiltradas) &&
+              subcategoriasFiltradas.map((subcategoria) => (
+                <option key={subcategoria.id} value={subcategoria.id}>
+                  {subcategoria.nome}
                 </option>
               ))}
           </select>
-          <p className={styles.error_message}>{errors.categoria?.message}</p>
+
+          <p className={styles.error_message}>
+            {errors.subcategoria?.message}
+          </p>
         </div>
 
         <div className={styles.element}>
-          <h2>Defina o seu email</h2>
+          <h2>O seu email</h2>
           <input
             className={styles.form_style}
+            style={{ backgroundColor: "#ccc" }}
             type="email"
             {...register("email")}
             placeholder="Insira o seu email"
+            value={user.email}
+            readOnly
           />
           <p className={styles.error_message}>{errors.email?.message}</p>
         </div>
