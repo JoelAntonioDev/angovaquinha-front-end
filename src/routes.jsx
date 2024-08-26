@@ -43,7 +43,6 @@ function AppRoutes() {
         <Route path="/admin-controle-publicacoes" element={<ControlePublicacoes/>}/>
         <Route path="/admin-relatorios" element={<Relatorios/>}/>
         <Route path="/admin-dashboard" element={<Dashboard/>}/>
-
       </Routes>
     </BrowserRouter>
   );
