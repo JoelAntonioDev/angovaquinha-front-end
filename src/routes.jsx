@@ -9,7 +9,6 @@ import InfoContacto from "./pages/UserProfile/infoContacto";
 import Conta from "./pages/UserProfile/conta";
 import UserProfile from "./pages/UserProfile/index";
 import Explorar from "./pages/Explorar";
-import ListarUsuario from "./pages/ListarUsuario/ListarUsuario";
 import Doacao from "./pages/Doacao";
 import VaquinhaList from "./pages/ListarVaquinhas/ListarVaquinha";
 import Admin from "./pages/Admin";
@@ -19,6 +18,7 @@ import Contribuicoes from "./pages/Admin/Contribuicoes";
 import Apoios from "./pages/Admin/Apoios";
 import ControlePublicacoes from "./pages/Admin/ControlePublicacoes";
 import Relatorios from "./pages/Admin/Relatorios";
+import Dashboard from "./pages/Admin/Dashboard";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -33,7 +33,6 @@ function AppRoutes() {
         <Route path="/conta" element={<Conta/>}/>
         <Route path="/infoContacto" element={<InfoContacto/>}/>
         <Route path="/explorar" element={<Explorar/>}/>
-        <Route path="/listarUsuario" element={<ListarUsuario/>}/>
         <Route path="/doar" element={<Doacao/>}/>
         <Route path="/listarVaquinha" element={<VaquinhaList/>}/>
         <Route path="/admin-panel" element={<Admin/>}/>
@@ -43,6 +42,7 @@ function AppRoutes() {
         <Route path="/admin-apoios" element={<Apoios/>}/>
         <Route path="/admin-controle-publicacoes" element={<ControlePublicacoes/>}/>
         <Route path="/admin-relatorios" element={<Relatorios/>}/>
+        <Route path="/admin-dashboard" element={<Dashboard/>}/>
 
       </Routes>
     </BrowserRouter>

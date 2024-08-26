@@ -50,9 +50,11 @@ function Container() {
   });
   return (
     <div className={styles.container_container}>
-      <div className={styles.secao_banner}></div>
+      <div className={styles.secao_banner}>
+        <img src="/src/images/banner1.png" alt="" />
+      </div>
       <div className={styles.secao_1}>
-        <CardVaquinha titulo={titulo} descricao={descricao} objectivo={objectivo}/>
+        <CardVaquinha titulo={titulo} descricao={descricao} objectivo={objectivo} />
       </div>
       <div className={styles.secao_2}>
         <h1>SECÇÃO 2</h1>

@@ -3,7 +3,9 @@ import styles from "./Header.module.css";
 function Header() {
   return (
     <header className={styles.header}>
-      <span>AngoVaquinhas</span>
+      <a href="/">
+        <span>AngoVaquinhas</span>
+      </a>
       <nav style={{ display: "flex", gap: "10px" }}>
         <div className={styles.barra}>
           <input

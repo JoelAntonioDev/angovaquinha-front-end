@@ -10,7 +10,6 @@
     flex-direction: column;
     align-items: center;
     gap:20px;
-    
 }
 .admin_left .admin_left_element{
     width: 100%;
@@ -26,8 +25,91 @@
 }
 .admin_right{
     width: 80%;
-    padding: 10px 5% 10px 5%;
+    padding: 10px 3% 10px 3%;
+    background-color: #E8EFF9;
 }
 .admin_right div{
-    background-color: aqua;
+}
+.container_default{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.primeira_linha{
+    display: flex;
+    flex-direction: row;
+
+}
+.primeira_linha_left{
+    width:100%;
+}
+.primeira_linha_right{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+.filtroB, .filtroC, .filtroD{
+    background-color: white;
+    width: 15ch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.segunda_linha{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+
+.segunda_linha_a, .segunda_linha_b, .segunda_linha_c{
+    background-color: white;
+    width: 15ch;
+    display: flex;
+    gap:15px;
+    min-height: 250px;
+    padding:25px;
+}
+.segunda_linha_a,.segunda_linha_c{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.segunda_linha_b{
+    width: 20%;
+}
+.container_grafico{
+    display: flex;
+}
+.grafico{
+    width:60%;
+}
+.terceira_linha{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+
+.terceira_linha_a, .terceira_linha_b, .terceira_linha_c{
+    background-color: white;
+    width: 15ch;
+    display: flex;
+    gap:15px;
+    min-height: 250px;
+    padding:25px;
+}
+.terceira_linha_a,.terceira_linha_c{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.terceira_linha_b{
+    width: 50%;
+}
+.quarta_linha{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+    background-color: white;
+    padding:25px;
+    min-height:400px;
 }

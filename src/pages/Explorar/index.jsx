@@ -2,7 +2,7 @@ import HeaderIn from "../../components/HeaderIn";
 import Footer from "../../components/Footer";
 import { useEffect, useState } from "react";
 import CardVaquinha from "../../components/CardVaquinha";
-
+import styles from "./Explorar.module.css";
 function Explorar() {
   const [vaquinhas, setVaquinhas] = useState([]);
 
@@ -19,7 +19,7 @@ function Explorar() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container_explorar}>
       <HeaderIn />
       <h1>EXPLORAR...</h1>
       {vaquinhas.map((vaquinha, index) => {

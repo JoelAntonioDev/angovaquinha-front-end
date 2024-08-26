@@ -41,7 +41,7 @@ function HeaderIn() {
             />
             {userData.email}
           </a>
-          <a onClick={handleLogout}>Sair</a>
+          <a href="#" onClick={handleLogout}>Sair</a>
         </nav>
       </header>
     </>

@@ -8,6 +8,7 @@ import Contribuicoes from "./Contribuicoes";
 import Apoios from "./Apoios";
 import ControlePublicacoes from "./ControlePublicacoes";
 import Relatorios from "./Relatorios";
+import Default from "./Default";
 function Admin() {
     const [selectedContent, setSelectedContent] = useState("default");
     const handleContentChange = (content)=>{
@@ -15,6 +16,8 @@ function Admin() {
     }
     const renderContent = ()=>{
         switch(selectedContent){
+            case "dashboard":
+              return <Default/>;
             case "usuarios":
                 return <Usuarios/>;
             case "vaquinhas":
@@ -28,7 +31,7 @@ function Admin() {
             case "controle de publicacoes":
                 return <ControlePublicacoes/>;
             default:
-                return <h1>SEJA BEM-VINDO</h1>;
+                return <Default/>;
         }
     }
   return (
@@ -37,6 +40,9 @@ function Admin() {
       <div className={styles.admin_content}>
         <div className={styles.admin_left}>
           <div >INFORMAÇÕES DO ADMIN</div>
+          <div className={styles.admin_left_element}>
+            <a href="#" onClick={()=>handleContentChange("dashboard")}>Dashboard</a>
+          </div>
           <div className={styles.admin_left_element}>
             <a href="#" onClick={()=>handleContentChange("usuarios")}>Usuários</a>
           </div>

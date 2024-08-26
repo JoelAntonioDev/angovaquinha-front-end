@@ -1,7 +1,7 @@
 import React from "react";
 
 function Apoios() {
-  return <>Apoioa</>;
+  return <>Apoios</>;
 }
 
 export default Apoios;
