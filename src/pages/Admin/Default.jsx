@@ -5,16 +5,60 @@ import { Chart } from "primereact/chart";
 
 function Dashboard() {
   const [chartData, setChartData] = useState({});
+  const [chartData2, setChartData2] = useState({});
+  const [chartData3, setChartData3] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-
+  const [chartOptions2, setChartOptions2] = useState({});
+  const [qtdUsuario, setQtdUsuario] = useState(0);
+  const [qtdVaquinhas, setQtdVaquinhas] = useState(0);
+  function obterQtdVaquinha(){
+    fetch("/api/get-qtd-vaquinhas", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log( data);
+          setQtdVaquinhas(data.data);
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+        });
+  }
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
-
+    obterQtdVaquinha()
+    fetch("/api/get-qtd-usuarios", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log( data);
+          setQtdUsuario(data.data);
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+        });
     const data = {
       labels: ["A", "B", "C"],
       datasets: [
         {
-          data: [300, 50, 100],
+          data: [qtdUsuario, 2, 1],
           backgroundColor: [
             documentStyle.getPropertyValue("--blue-500"),
             documentStyle.getPropertyValue("--yellow-500"),
@@ -28,12 +72,62 @@ function Dashboard() {
         },
       ],
     };
-
     const options = {
       cutout: 60, // Numeric value for cutout percentage
     };
+    const chartData2 = {
+      labels: ["A", "B", "C","D"],
+      datasets: [
+        {
+          label: "Vaquinhas",
+          data: [200, 50, 10,8],
+          backgroundColor: [
+            getComputedStyle(document.documentElement).getPropertyValue("--blue-500"),
+            getComputedStyle(document.documentElement).getPropertyValue("--yellow-500"),
+            getComputedStyle(document.documentElement).getPropertyValue("--green-500"),
+          ],
+          hoverBackgroundColor: [
+            getComputedStyle(document.documentElement).getPropertyValue("--blue-400"),
+            getComputedStyle(document.documentElement).getPropertyValue("--yellow-400"),
+            getComputedStyle(document.documentElement).getPropertyValue("--green-400"),
+          ],
+        },
+      ],
+    };
+    const options2 = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+        legend: {
+          labels: {
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              weight: 500
+            }
+          },
+          grid: {
+            display: false,
+            drawBorder: false
+          }
+        },
+        y: {
+          ticks: {
+          },
+          grid: {
+            drawBorder: false
+          }
+        }
+      }
+    };
     setChartData(data);
     setChartOptions(options);
+    setChartData2(chartData2);
+    setChartOptions2(options2);
   }, []);
 
   return (
@@ -75,16 +169,30 @@ function Dashboard() {
             </div>
             <div>
               <ul>
-                <li>Usuários</li>
-                <li>Usuários</li>
-                <li>Usuários</li>
-                <li>Usuários</li>
-                <li>Usuários</li>
+                <li>Masculino</li>
+                <li>Feminino</li>
+                <li>Por faixa etária</li>
               </ul>
             </div>
           </div>
         </div>
-        <div className={styles.segunda_linha_b}>Gráfico de vaquinhas</div>
+        <div className={styles.segunda_linha_b}>
+          Gráfico de vaquinhas
+          <div className={styles.container_grafico}>
+            <div className={styles.grafico}>
+              <div
+                  style={{width: "100%", maxWidth: "600px", margin: "0 auto"}}
+              >
+                <Chart
+                    type="bar"
+                    data={chartData2}
+                    options={chartOptions2}
+                    style={{maxHeight:"150px"}}
+                />
+              </div>
+            </div>
+
+          </div></div>
         <div className={styles.segunda_linha_c}>Gráfico de contribuições</div>
       </div>
 

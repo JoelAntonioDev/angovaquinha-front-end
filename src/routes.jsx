@@ -18,7 +18,6 @@ import Contribuicoes from "./pages/Admin/Contribuicoes";
 import Apoios from "./pages/Admin/Apoios";
 import ControlePublicacoes from "./pages/Admin/ControlePublicacoes";
 import Relatorios from "./pages/Admin/Relatorios";
-import Dashboard from "./pages/Admin/Dashboard";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -42,7 +41,6 @@ function AppRoutes() {
         <Route path="/admin-apoios" element={<Apoios/>}/>
         <Route path="/admin-controle-publicacoes" element={<ControlePublicacoes/>}/>
         <Route path="/admin-relatorios" element={<Relatorios/>}/>
-        <Route path="/admin-dashboard" element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
   );

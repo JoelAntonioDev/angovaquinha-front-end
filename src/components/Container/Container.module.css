@@ -33,8 +33,55 @@
 }
 .secao_2{
     height: 45vh;
-    background-color: grey;
+    background-color: rgba(32, 170, 216, 0.5);
 }
 .secao_3{
     height: 45vh;
+}
+.secao_citacao {
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.secao_citacao blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #333;
+    margin: 0;
+}
+
+.secao_citacao footer {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+}
+.secao_destaques, .secao_informacoes, .secao_contato, .secao_testemunhos, .secao_faq {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.secao_destaques h2, .secao_informacoes h2, .secao_contato h2, .secao_testemunhos h2, .secao_faq h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.secao_testemunhos blockquote, .secao_faq p {
+    margin: 10px 0;
+}
+
+.rodape {
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+.rodape a {
+    color: #fff;
+    text-decoration: none;
 }

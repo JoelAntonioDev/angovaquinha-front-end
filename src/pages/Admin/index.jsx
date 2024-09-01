@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Admin.module.css";
 import HeaderIn from "../../components/HeaderIn";
 import Footer from "../../components/Footer";
@@ -11,13 +11,15 @@ import Relatorios from "./Relatorios";
 import Default from "./Default";
 function Admin() {
     const [selectedContent, setSelectedContent] = useState("default");
+
+
     const handleContentChange = (content)=>{
         setSelectedContent(content);
     }
     const renderContent = ()=>{
         switch(selectedContent){
             case "dashboard":
-              return <Default/>;
+              return <Default />;
             case "usuarios":
                 return <Usuarios/>;
             case "vaquinhas":
