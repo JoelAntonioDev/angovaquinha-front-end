@@ -17,3 +17,8 @@ Se você deseja fazer parte dessa iniciativa ou contribuir com o desenvolvimento
 ---
 
 **Nota:** Este projeto está em fase de desenvolvimento e pode sofrer alterações ao longo do tempo. Acompanhe as atualizações e participe da nossa comunidade para saber mais sobre o progresso e as novas funcionalidades.
+
+##COMANDOS PARA CLONAR E EXECUTAR O PROJECTO
+git clone https://github.com/JoelAntonioDev/angovaquinha-front-end.git
+cd angovaquinha-front-end
+npm install
